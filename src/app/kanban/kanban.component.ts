@@ -1,22 +1,24 @@
-import { Component, ElementRef, OnDestroy, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-// @ts-ignore 
+import { Component, ElementRef, OnDestroy, OnInit, ViewEncapsulation, output, inject } from '@angular/core';
+// @ts-ignore
 import '../../webix/kanban/codebase/kanban.js';
 import { TasksService } from '../kanbanData/tasks.service';
 
 @Component({
     encapsulation: ViewEncapsulation.None,
     selector: 'kanban',
-    template:"<span></span>",
+    template: "<span></span>",
     styleUrls: [
-      './../../webix/kanban/codebase/kanban.css',
+        './../../webix/kanban/codebase/kanban.css',
     ],
     providers: [TasksService]
 })
 export class KanbanComponent implements OnDestroy, OnInit {
+    private tasks = inject(TasksService);
     private ui: webix.ui.kanban;
-    @Output() onCardStatusChange = new EventEmitter<any>();
+    readonly onCardStatusChange = output<any>();
 
-    constructor(root: ElementRef, private tasks: TasksService) {
+    constructor() {
+        const root = inject(ElementRef);
         this.ui = <webix.ui.kanban> webix.ui({
             container: root.nativeElement,
             view: "kanban",
@@ -39,7 +41,7 @@ export class KanbanComponent implements OnDestroy, OnInit {
             }
         })
     }
-    
+
     ngOnInit(){
         this.ui.resize();
     }

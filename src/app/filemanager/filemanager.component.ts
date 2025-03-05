@@ -1,21 +1,22 @@
-import { Component, ElementRef, OnDestroy, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-// @ts-ignore 
+import { Component, ElementRef, OnDestroy, OnInit, ViewEncapsulation, output, inject } from '@angular/core';
+// @ts-ignore
 import * as fileManager from '../../webix/filemanager/codebase/filemanager.js';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  selector: 'filemanager',
-  template:'<div class="fm-container"></div>',
-  styleUrls: [
-      './filemanager.component.css',
-      './../../webix/filemanager/codebase/filemanager.css',
+    encapsulation: ViewEncapsulation.None,
+    selector: 'filemanager',
+    template: '<div class="fm-container"></div>',
+    styleUrls: [
+        './filemanager.component.css',
+        './../../webix/filemanager/codebase/filemanager.css',
     ]
 })
 export class FileManagerComponent implements OnDestroy, OnInit {
+    private root = inject(ElementRef);
     private app: any;
-    @Output() onStateChange = new EventEmitter<any>();
+    readonly onStateChange = output<any>();
 
-    constructor(private root: ElementRef) {
+    constructor() {
         this.app = new (fileManager as any).App({
             url: "https://docs.webix.com/filemanager-backend/"
         });
@@ -23,19 +24,19 @@ export class FileManagerComponent implements OnDestroy, OnInit {
         const state = this.app.getState();
         state.$observe("selectedItem", (selection: any) => {
             this.onStateChange.emit({
-                type: "selectedItem", 
+                type: "selectedItem",
                 value: selection
             });
         });
 
         state.$observe("path", (path: any) => {
             this.onStateChange.emit({
-                type: "path", 
+                type: "path",
                 value: path
             });
         })
     }
-    
+
     getState(){
         // @ts-ignore
         return this.app.getState();
