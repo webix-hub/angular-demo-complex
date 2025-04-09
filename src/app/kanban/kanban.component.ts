@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnDestroy, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-// @ts-ignore 
+// @ts-ignore
 import '../../webix/kanban/codebase/kanban.js';
 import { TasksService } from '../kanbanData/tasks.service';
 
 @Component({
+    standalone: false,
     encapsulation: ViewEncapsulation.None,
     selector: 'kanban',
     template:"<span></span>",
@@ -39,7 +40,7 @@ export class KanbanComponent implements OnDestroy, OnInit {
             }
         })
     }
-    
+
     ngOnInit(){
         this.ui.resize();
     }

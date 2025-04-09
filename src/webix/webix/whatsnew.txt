@@ -1,53 +1,170 @@
 Check the full list of changes at https://docs.webix.com/desktop__whats_new.html
 
-Version 10.0.5 (January 2023)
-==============================
+Version 11.0.3 (January 2025)
+=============================
 
 ### Fixes
 
-- datatable with spans: render time is too long if row count > 10000
-- Sidemenu with dnd over the list throws error on touch devices
+- DataTable: improved Tab navigation flow when some editors are blocked with `onBeforeEditStart`
+- DataTable: correct sizing of the multicombo filter 
+- File Manager and Document Manager:
+	- compact mode: Sidemenu should be hidden after a folder was selected
+- Scheduler:
+	- regression: editor can't fill with values when opened for existing events
 
-Version 10.0.4 (December 2022)
-==============================
+[Full list of changes and fixes](https://docs.webix.com/desktop__whats_new_11_0_x.html)
 
-### Fixes
-
-- error with navigator.userAgent in env.js when agent is {}
-- When using addCss / removeCss it can lead to problems, since the css class is removed by a simple string replace
-
-Version 10.0.3 (December 2022)
-==============================
+Version 11.0.2 (January 2025)
+=============================
 
 ### Fixes
 
-- Conflict between Multicombo and window/scrollview position and sizing
-- Layout with margin: if all content is hidden, layout moves other elements
-- non-editable Colorpicker cannot have a placeholder
-- Portlet cannot handle drop of itself on its child
-- onBeforeSelect with return false won't prevent selection with Shift in multiselect list
+- Gage chart: the size of the arrow didn't adapt to the size of the chart
+- Bullet chart in Dashboard: resizing to the minimum width/height caused rendering an error
+- Spreadsheet
+	- export failed for sheets that had references to cells with HYPERLINK without text
+	- references to cells with HYPERLINK should return the cell value
+	- cell highlighting didn't work with values typed in lowercase
+- Scheduler
+	- Material skin: wrong hover color on the tabbar's "more" icon
+	- the readonly mode allowed copying and cutting events
+	- dates with non-zero seconds were rounded incorrectly (events that end at 23:59:01 were doubled to the next day)
+	- event editor: unwanted changes in `state.selected` were made during editing
+- Diagram Editor
+	- LocalData and History services weren't available for customization
+- ToDo
+	- unescaped characters in tasks break HTML
+	- escaped characters in hashtags break filtering
+	- task menu: "No project" label was not localized dynamically
 
-Version 10.0.2 (November 2022)
-==============================
+[Full list of changes and fixes](https://docs.webix.com/desktop__whats_new_11_0_x.html)
+
+Version 11.0.1 (November 2024)
+=============================
 
 ### Fixes
 
-- Datatable: addCellCss and removeCss are not implemented for spans
-- spans are ignored by add/remove operations
-- miscellaneous issues with TS typings
-- TS definitions: method return type should not be a union
-- input format regression: minus sign disappeared
-- getValue does not return value from view Select config
-- Spanish translation ("not contains") should be "no contiene" (without the final "t" in "not")
-- incorrect rangechart default type
-- Datatable: editor with type "password" displays the actual value
+- Tabbar: color is not adjusted inside the Toolbar in dark mode
 
-Version 10.0.1 (November 2020)
-==============================
+[Full list of changes and fixes](https://docs.webix.com/desktop__whats_new_11_0_x.html)
+
+Version 11.0.0 (November 2024)
+=============================
+
+### Major features
+
+- Export of images is now available in the common toExcel() method and in Spreadsheet
+- The *mode: "auto"* configuration property for webix.print()
+- export to Excel: frozen rows/cols
+- Spreadsheet:
+	- a method that allows getting the cell reference from the cell ID in a table
+	- import from Excel: filters, zoom, header visibility, gridlines
+	- export to Excel: export frozen rows/cols, zoom, header visibility, gridlines
+	- the find and replace functionality
+	- displaying and filtering math formulas by category
+	- highlighting references in the formulas mode
+- File Manager and Document Manager:
+	- extended filters for searching files
+	- view search results in the Grid mode
+- Report Manager: 
+	- ability to show reports as standalone widgets 
+
+### Updates
+
+- Supported PDF.js version updated to 4.7.76
 
 ### Fixes
 
-- error in code bundling scripts
+- regression in Multicombo: suggest stays hidden while a user is typing
+- regression in Multicombo: bottomLabel leads to wrong sizing
+- improved data export to CSV (filterHTML)
+- typescript definitions are improved
+- Datatable: configuration of filters may ignore optionWidth in inputConfig
+- Datatable: multisort state is shared across instances
+- Datatable: concurrent data loads throw an error
+- Treetable: client-side filters cannot be reset after additional parse
+- Datatable in Firefox: a tooltip is still visible after the cursor has left the table 
+- Datatable in Firefox on Windows, any browser on macOS: inactive scrollbars
+- Datatable: unnecessary mutations in the column's config
+- Dynamic loading in Datatable: keyboard navigation does not load data upwards
+- Dynamic loading in Datatable: dragging scrollbar triggers an additional request with incorrect parameters
+
+[Full list of changes and fixes](https://docs.webix.com/desktop__whats_new_11_0.html)
+
+
+Version 10.3 (August 2024)
+=============================
+
+### Updates
+
+- TypeScript definitions are improved
+
+### Fixes
+
+- Complex widgets: checking whether a CSS class name starts with the widget-specific prefix instead of checking the whole class name is implemented
+- memory leaks related to filters
+- memory leaks related to custom scroll
+- handling errors within GraphQL proxy
+- wrong "placeholder" CSS style in .min version
+- Datepicker: format set as a string with type: "month"/"year" doesn't apply correctly
+- DataLayout can't pass data to elements inside the Accordion item
+- Dashboard: returning false in the factory crashes restore()
+- Dynamic UI rebuilding does not work for MultiView
+- The onBeforeEditStop event can't handle popup editors
+- SideMenu with context and selection
+- MultiView with the enabled keepViews config does not add PDFViewer properly
+- Incorrect work of the elementsConfig property of Form
+- Incorrect value of a checkbox in Property Sheet
+- Timeline: details do not always appear with the height:"auto" setting specified
+- A typo in the French locale
+- Incorrect behavior when the cursor hovers over the resizer line
+- Daterange: time of the end date is not displayed properly
+- Radio button with empty options/no options breaks UI rendering
+- DataTable: incorrect work of the inputConfig property
+- DataTable: zeros are not displayed when using webix.print()
+- The onItemSingleClick event doesn't work for DataView
+- MultiCombo: wrong size if the parent window was closed with Escape while the suggest list was opened
+- Unwanted filter icons in the headermenu options
+- The label and placeholder properties of Bullet Graph ignore the change of value
+- DOMException is thrown when validating the Text control with the type "number"
+- The adjustRowHeight method ignores complex templates
+- The DashBoard panel border disappears on minimizing the panel
+- webix.Date.strToDate can't parse ISO 8601 short expressions
+- DatePicker: the format set as a string with the type: "month"/"year" doesn't apply correctly
+- Wrong "placeholder" CSS style in the minified version
+- Export to Excel: calling toExcel() in the Numbers editor (iOS/macOS) results in replacing empty values with zeroes
+
+
+[Full list of changes and fixes](https://docs.webix.com/desktop__whats_new_10_3.html)
+
+
+Version 10.2 (October 2023)
+=============================
+
+### Updates
+
+- typescript definitions are improved
+
+### Fixes
+
+- incorrect height of multicombo with top label
+- incorrect export to excel for data with array-based formulas
+- selecting values from the list doesn't work for combo with data feed
+- incorrect rendering of bullet graphs in the firefox
+- calendar widget doesn't preserve correct date value in the timepicker mode
+
+
+Version 10.1 (May 2023)
+=============================
+
+### Major features
+
+- Group calls in the Chat widget
+- Year view in the Scheduler widget
+- Improved UX in the ToDo list
+
+
+[Full list of changes and fixes](https://docs.webix.com/desktop__whats_new_10_1.html)
 
 Version 10.0 (November 2022)
 =============================

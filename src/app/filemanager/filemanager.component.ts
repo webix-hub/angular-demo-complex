@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnDestroy, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-// @ts-ignore 
+// @ts-ignore
 import * as fileManager from '../../webix/filemanager/codebase/filemanager.js';
 
 @Component({
+  standalone: false,
   encapsulation: ViewEncapsulation.None,
   selector: 'filemanager',
   template:'<div class="fm-container"></div>',
@@ -23,19 +24,19 @@ export class FileManagerComponent implements OnDestroy, OnInit {
         const state = this.app.getState();
         state.$observe("selectedItem", (selection: any) => {
             this.onStateChange.emit({
-                type: "selectedItem", 
+                type: "selectedItem",
                 value: selection
             });
         });
 
         state.$observe("path", (path: any) => {
             this.onStateChange.emit({
-                type: "path", 
+                type: "path",
                 value: path
             });
         })
     }
-    
+
     getState(){
         // @ts-ignore
         return this.app.getState();
