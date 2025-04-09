@@ -1,4 +1,4 @@
-Webix FileManager v.10.0.5
+Webix FileManager v.11.0.3
 ================
 
 https://webix.com
@@ -32,4 +32,4 @@ or have some issue with API and behavior of the component,
 please contact us at support@webix.com
 
 
-(c) XB Software Ltd. 2023
+(c) XB Software Ltd. 2025
